@@ -1,6 +1,11 @@
 # faas-grafana-annotate
 An OpenFaaS function to create annotations in Grafana (>= v4.6).
 
+Install faas-cli
+```bash
+curl -sSL https://cli.openfaas.com | sudo sh
+```
+
 ## Supported Request Parameters
 - body (string, text/plain)
 - query string
