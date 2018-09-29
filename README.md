@@ -13,7 +13,7 @@ curl -sSL https://cli.openfaas.com | sudo sh
   - panelId (int, optional)
   - dashboardId (int, optional)
 
-By default, if no tags are provided, the tag "global" is used for your annotation. In your dashboard, make sure *Annotations & Alerts* is enabled and and filtered by the appropriate tag.
+By default, if no tags are provided, the tag "global" is used for your annotation. In your dashboard, make sure *Annotations & Alerts* is enabled and filtered by the appropriate tag.
 
 ## Function Configuration
 - environment
@@ -23,7 +23,7 @@ By default, if no tags are provided, the tag "global" is used for your annotatio
   - grafana_username
   - grafana_password
 
-This function prioritizes **grafana_api_token** first, then falls back to basic auth provided by grafana_username and grafana_password.
+This function prioritizes **grafana_api_token** first, then falls back to basic authentication provided by grafana_username and grafana_password.
 
 ### Grafana Configuration
 1) Add new API key (User icon -> API Keys) w/ Editor role
@@ -49,4 +49,5 @@ curl
 ```bash
 curl -XPOST -d 'test annotation' "http://localhost:8080/function/grafana-annotate?tag=global&tag=faas&tag=application"
 ```
-<!-- [!][grafana screenshot]() -->
+## Screenshot Example
+![faas grafana screenshot](https://github.com/tucows/faas-grafana-annotate/blob/master/grafana_screen.png) 
