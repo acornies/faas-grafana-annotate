@@ -2,6 +2,7 @@ package function
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -9,6 +10,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -19,12 +21,36 @@ func Handle(req []byte) string {
 		grafanaUrl = "http://grafana:3000"
 	}
 
+	ignoreCert := false
+	envSkipVerify := os.Getenv("skip_tls_verify")
+	if len(envSkipVerify) == 0 {
+		ignoreCert = false
+	} else {
+		v, err := strconv.ParseBool(envSkipVerify)
+		if err != nil {
+			ignoreCert = false
+		} else {
+			ignoreCert = v
+		}
+	}
+
 	payload := createPayload(string(req), grafanaUrl)
 
 	payloadJson, _ := json.Marshal(payload)
 	url := fmt.Sprintf("%s/api/annotations", grafanaUrl)
 
+	scheme := "http"
+	if strings.Contains(grafanaUrl, "https") {
+		scheme = "https"
+	}
+	trIgnore := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
 	client := &http.Client{}
+	if scheme == "https" && ignoreCert {
+		client = &http.Client{Transport: trIgnore}
+	}
+
 	request, err := http.NewRequest("POST", url, bytes.NewBuffer(payloadJson))
 
 	token, tokenErr := getSecret("grafana_api_token")
