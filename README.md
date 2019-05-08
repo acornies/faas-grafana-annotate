@@ -5,6 +5,7 @@ Install faas-cli
 ```bash
 curl -sSL https://cli.openfaas.com | sudo sh
 ```
+Testing ofc
 
 ## Supported Request Parameters
 - body (string, text/plain)
