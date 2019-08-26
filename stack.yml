@@ -16,6 +16,3 @@ functions:
       # - grafana_username
       # - grafana_password
       - grafana_api_token
-      - github-webhook-secret
-      - payload-secret
-      
