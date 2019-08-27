@@ -6,13 +6,13 @@ functions:
   grafana-annotate:
     lang: go
     handler: ./grafana-annotate
-    image: acornies/grafana-annotate:0.1.1
+    image: acornies/grafana-annotate:0.1.2
     environment:
       write_debug: false
       grafana_url: http://grafana:3000
       content-type: application/json
       skip_tls_verify: false
     secrets:
-      # - grafana_username
-      # - grafana_password
-      - grafana_api_token
+      # - grafana-username
+      # - grafana-password
+      - grafana-api-token

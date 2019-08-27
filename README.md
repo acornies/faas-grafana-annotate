@@ -5,7 +5,6 @@ Install faas-cli
 ```bash
 curl -sSL https://cli.openfaas.com | sudo sh
 ```
-Testing ofc
 
 ## Supported Request Parameters
 - body (string, text/plain)
@@ -20,11 +19,11 @@ By default, if no tags are provided, the tag "global" is used for your annotatio
 - environment
   - grafana_url
 - secrets
-  - grafana_api_token
-  - grafana_username
-  - grafana_password
+  - grafana-api-token
+  - grafana-username
+  - grafana-password
 
-This function prioritizes **grafana_api_token** first, then falls back to basic authentication provided by grafana_username and grafana_password.
+This function prioritizes **grafana-api-token** first, then falls back to basic authentication provided by grafana-username and grafana-password.
 
 ### Grafana Configuration
 1) Add new API key (User icon -> API Keys) w/ Editor role
@@ -51,4 +50,4 @@ curl
 curl -XPOST -d 'test annotation' "http://localhost:8080/function/grafana-annotate?tag=global&tag=faas&tag=application"
 ```
 ## Screenshot Example
-![faas grafana screenshot](https://github.com/tucows/faas-grafana-annotate/blob/master/grafana_screen.png) 
+![faas grafana screenshot](https://github.com/tucows/faas-grafana-annotate/blob/master/grafana_screen.png)

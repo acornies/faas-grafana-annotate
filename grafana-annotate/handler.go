@@ -53,15 +53,15 @@ func Handle(req []byte) string {
 
 	request, err := http.NewRequest("POST", url, bytes.NewBuffer(payloadJson))
 
-	token, tokenErr := getSecret("grafana_api_token")
+	token, tokenErr := getSecret("grafana-api-token")
 
 	var contextMessage string
 
-	// try to use grafana_api_token secret first, then basic auth
+	// try to use grafana-api-token secret first, then basic auth
 	if tokenErr != nil {
 		contextMessage = fmt.Sprintf("Grafana credential error: API token not found. Using basic auth: %v", tokenErr)
-		username, userErr := getSecret("grafana_username")
-		password, pwdErr := getSecret("grafana_password")
+		username, userErr := getSecret("grafana-username")
+		password, pwdErr := getSecret("grafana-password")
 
 		if userErr != nil {
 			contextMessage += fmt.Sprintf("Grafana credential error: username not found. Using default... %v", userErr)
